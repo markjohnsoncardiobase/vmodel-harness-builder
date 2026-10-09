@@ -79,15 +79,21 @@ any tool that supports that format can load it directly.
 3. Say: **"Build my V-model harness."**
 4. The builder will:
    1. recommend the model and effort;
-   2. research your codebase (stack, test and lint commands, CI, how to run the app, risky areas);
-   3. interview you in small batches (intake, what you build, ticket nature, risk, available
-      verification, humans in the loop, budget, triage, artefacts, handback, memory);
-   4. show you a one-page design of your V with every gate typed as deterministic, adversarial or
+   2. ask whether you want a **local harness** you run in your agent, or a **factory** that picks
+      up tickets and runs unattended;
+   3. research your codebase (stack, test and lint commands, CI, how to run the app, risky areas);
+   4. interview you in small batches (intake, what you build, ticket nature, risk, available
+      verification, humans in the loop, budget, triage, artefacts, handback, memory, plus runner,
+      state, environments, identity, approvals and limits for a factory);
+   5. show you a one-page design of your V with every gate typed as deterministic, adversarial or
       human, and wait for your approval;
-   5. generate your harness skill and artefact templates into your repo;
-   6. dry-run it on one small ticket and tune it with you;
-   7. remind you of the limits.
-5. From then on, use your generated harness for each ticket.
+   6. generate your harness (and, for a factory, the runner and its scripts) into your repo;
+   7. prove it end to end: take one real ticket from intake to built, verified and in a PR ready
+      for your review, fixing the harness along the way;
+   8. hand over and remind you of the limits.
+5. The builder does not stop until that PR is ready for review or you say stop. It pauses only for
+   your plan approval, your review, and anything only you can unblock.
+6. From then on, use your harness for each ticket, or let the factory run.
 
 ## When to use it
 

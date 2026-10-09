@@ -2,7 +2,7 @@
 
 Each step lists what it produces, who or what produces it, and how it is verified. The pairing
 column shows which right-side step verifies which left-side step. Use this table to map the
-user's setup onto the V in builder step 4.
+user's setup onto the V in builder step 5.
 
 ## Overview
 

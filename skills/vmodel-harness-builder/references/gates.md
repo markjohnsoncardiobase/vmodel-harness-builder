@@ -1,7 +1,7 @@
 # Gates
 
 A gate is a check that must pass before the next stage starts. Each gate has a type, an exact
-check, and a defined failure action. Use this file in builder step 4 to type every gate in the
+check, and a defined failure action. Use this file in builder step 5 to type every gate in the
 user's harness.
 
 ## Three gate types

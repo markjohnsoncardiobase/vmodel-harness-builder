@@ -1,7 +1,7 @@
 # Interview question bank
 
-Use this in builder step 3. Ask three to five questions per batch. Before each question, check the
-research findings from step 2. If research answered it, state what you found and ask for a yes
+Use this in builder step 4. Ask three to five questions per batch. Before each question, check the
+research findings from step 3. If research answered it, state what you found and ask for a yes
 instead of asking the question cold.
 
 Each question lists why it matters and how the answer changes the generated harness. Keep a
@@ -53,7 +53,7 @@ library, data pipeline, ML service, infrastructure.
 - Why: these become protected paths and forced full-path triggers.
 - Changes: write fences, triage rules, extra human gates if needed.
 
-**B4. Confirm the research summary.** Present the stack, commands and risky areas found in step 2.
+**B4. Confirm the research summary.** Present the stack, commands and risky areas found in step 3.
 - Why: the harness must use real commands.
 - Changes: the gate table.
 
@@ -194,8 +194,51 @@ adversarial pass. Never testing, regression or evidence.
 flaky tests.
 - Changes: the continual-improvement rules.
 
+## L. Factory only
+
+Ask these only if the user chose factory mode in step 2.
+
+**L1. Where will the factory run?** A VM, a container platform, a CI scheduler, a spare machine.
+- Changes: the runner entry point, how secrets reach it, and how it is restarted.
+
+**L2. What starts a pass?** A schedule (every N minutes), a tracker webhook, a label or status change.
+- Changes: the trigger, and how the factory picks which ticket to work on next.
+
+**L3. Where does state live?** A state file, a small database, the ticket itself.
+- Changes: how passes stay idempotent and resume after a crash.
+
+**L4. How many tickets at once?** One global worker, one per ticket owner, one per product.
+- Changes: the locking rule.
+
+**L5. How does each ticket get a clean world?** A worktree per ticket, a fresh copy of the app and
+database, a preview environment from CI.
+- Changes: the setup and teardown scripts and where reviewers open the live app.
+
+**L6. Who does the factory post as?** A bot or service account, never a person.
+- Changes: the identity used for comments, so the factory never mistakes its own comment for a
+  human approval.
+
+**L7. How is approval detected?** A standalone approval comment from a named human, newer than the
+plan digest.
+- Changes: the approval rule. Negations and bot comments never approve.
+
+**L8. When should it give up and ask?** After N rejections in a row, after a time budget, on a
+blocked environment.
+- Changes: escalation and who gets notified.
+
+**L9. Where do people hear from it?** Chat channel, email, the ticket only.
+- Changes: notification hooks.
+
+**L10. What are the usage limits?** Model subscriptions, API budgets, CI minutes.
+- Changes: limit guards and any provider fallback.
+
+**L11. How are changes to the factory itself released?** Straight to main, or a probation release
+that rolls back on failure.
+- Changes: the release process for the harness code.
+
 ## Closing the interview
 
 1. Read the answer sheet back as a short list.
 2. Flag every level of the V that has no real verification yet.
-3. Ask for a yes, then move to builder step 4.
+3. Confirm the proving-run ticket for step 7.
+4. Ask for a yes, then move to builder step 5.
